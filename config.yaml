@@ -1,4 +1,6 @@
-requests_per_min: 10
+rate_limiter:
+  interval_in_sec: 6000 #10 minutes
+  max_requests: 10
 
 listen:
   http:

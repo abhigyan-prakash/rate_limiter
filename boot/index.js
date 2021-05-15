@@ -2,7 +2,12 @@ import express from 'express';
 import { CallContextStatic } from './call_context/call_context_static';
 import { Config } from './config';
 import router from '../routes';
-import { createRequestContext, handle404, handleErrors } from './middlewares';
+import {
+  createRequestContext,
+  handle404,
+  handleErrors,
+  rateLimit
+} from './middlewares';
 
 let staticContext = null;
 
@@ -34,6 +39,9 @@ export async function boot() {
     staticContext.logger.error('listen port not configured');
     return process.exit(9);
   }
+
+  // Initialize rate limiter
+  app.use(rateLimit);
 
   // Reply with 404 for unmatched routes
   app.use('*', handle404);
