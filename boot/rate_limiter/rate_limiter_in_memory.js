@@ -1,8 +1,13 @@
-import { RateLimiter } from './rate_limiter.';
+import { RateLimiter } from './rate_limiter';
 
 export class InMemoryRateLimter extends RateLimiter {
   constructor(context, options = {}) {
+    if (InMemoryRateLimter._instance) {
+      return InMemoryRateLimter._instance;
+    }
+
     super(context, options);
+    InMemoryRateLimter._instance = this;
 
     this.storage = {};
     this.ttls = {};

@@ -68,7 +68,7 @@ export function handle404(request, response) {
 /**
  * Check if the rate limit has reached, if reached deny request
  */
-export function rateLimit(request, response, next) {
+export async function rateLimit(request, response, next) {
   request.context.logger.info(
     `Checking the rate limit for: ${request.context.clientRemoteAddress}`
   );
@@ -84,7 +84,10 @@ export function rateLimit(request, response, next) {
     maxRequests
   });
 
-  const isAllowed = limiter.limitReached(request.context.clientRemoteAddress);
+  const isAllowed = await limiter.limitReached(
+    request.context.clientRemoteAddress
+  );
+
   if (isAllowed) {
     request.context.logger.info(
       `Request allowed for: ${request.context.clientRemoteAddress}`
@@ -95,5 +98,5 @@ export function rateLimit(request, response, next) {
   request.context.logger.error(
     `Request limit reached for: ${request.context.clientRemoteAddress}`
   );
-  return res.status(429).send('Too many requests');
+  return response.status(429).send('Too many requests');
 }

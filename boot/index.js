@@ -28,8 +28,14 @@ export async function boot() {
   // Intialize the express app
   let app = express();
 
+  app.set('trust proxy', '127.0.0.1');
+
   // Initialize the request context
   app.use(createRequestContext);
+
+  // Initialize rate limiter
+  staticContext.logger.debug(`Initializing the rate limiter`);
+  app.use(rateLimit);
 
   // Initalize routes
   app.use(router);
@@ -39,9 +45,6 @@ export async function boot() {
     staticContext.logger.error('listen port not configured');
     return process.exit(9);
   }
-
-  // Initialize rate limiter
-  app.use(rateLimit);
 
   // Reply with 404 for unmatched routes
   app.use('*', handle404);

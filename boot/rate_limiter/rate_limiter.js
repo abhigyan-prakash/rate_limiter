@@ -41,7 +41,7 @@ export class RateLimiter extends ContextObject {
     const timestamps = await this.getTimestamps(id, true);
     const numTimestamps = timestamps.length;
 
-    return numTimestamps > this.maxInInterval;
+    return numTimestamps < this.maxRequests;
   }
 
   getCurrentMicrotime() {

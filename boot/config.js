@@ -4,16 +4,14 @@ import YAML from 'yaml';
 import { ContextObject } from './context_object';
 import { Util } from './util';
 
-let _instance = null;
-
 export class Config extends ContextObject {
   constructor(context) {
-    if (_instance) {
-      return _instance;
+    if (Config._instance) {
+      return Config._instance;
     }
 
     super(context);
-    this._instance = this;
+    Config._instance = this;
 
     this.configData = {};
     this.util = new Util(context);

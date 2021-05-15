@@ -10,7 +10,7 @@ export class Logger extends LoggerBase {
     super();
 
     let pinoLogger = pino(pinoDefaults);
-    logger = expressPino({ logger: pinoLogger });
+    logger = expressPino({ logger: pinoLogger }).logger;
   }
 
   get _pino() {

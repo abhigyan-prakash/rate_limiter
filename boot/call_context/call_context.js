@@ -49,11 +49,6 @@ export class CallContext extends CallContextBase {
         ip = ip.split(':').slice(-1);
         ip = ip[0] || '';
       }
-
-      // Skip local addresses
-      if (ip == '1') {
-        ip = '';
-      }
     }
 
     if (ip) {
