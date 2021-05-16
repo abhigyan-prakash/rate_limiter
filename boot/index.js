@@ -28,7 +28,7 @@ export async function boot() {
   // Intialize the express app
   let app = express();
 
-  app.set('trust proxy', '127.0.0.1');
+  app.set('trust proxy');
 
   // Initialize the request context
   app.use(createRequestContext);

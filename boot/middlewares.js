@@ -38,7 +38,7 @@ export async function createRequestContext(request, response, next) {
   next();
 }
 
-export function handleErrors(error, request, response, next) {
+export function handleErrors(error, request, response) {
   request.context.logger.error(error);
 
   if (error instanceof GeneralError) {

@@ -1,5 +1,3 @@
-import uuid4 from 'uuid-random';
-import uuidValidate from 'uuid-validate';
 import { HEADER_X_FORWARDED_FOR } from '../defines';
 import { Logger } from '../logger/Logger';
 import { CallContextBase } from './call_context_base';

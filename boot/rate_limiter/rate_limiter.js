@@ -34,6 +34,9 @@ export class RateLimiter extends ContextObject {
    * `addNewTimestamp` flag is set, adds a new current microsecond timestamp.
    */
   async getTimestamps(id, addNewTimestamp) {
+    this.logger.error(
+      `Base class called with id: ${id} and addNewTimestamp: ${addNewTimestamp}`
+    );
     return Promise.reject(new Error('Not implemented'));
   }
 
@@ -41,6 +44,7 @@ export class RateLimiter extends ContextObject {
    * Clears rate limiting state for the provided ID.
    */
   async clear(id) {
+    this.logger.error(`Base class called with id: ${id}`);
     return Promise.reject(new Error('Not implemented'));
   }
 
