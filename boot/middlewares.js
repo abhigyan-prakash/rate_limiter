@@ -84,11 +84,11 @@ export async function rateLimit(request, response, next) {
     maxRequests
   });
 
-  const isAllowed = await limiter.limitReached(
+  const isBlocked = await limiter.limitReached(
     request.context.clientRemoteAddress
   );
 
-  if (isAllowed) {
+  if (!isBlocked) {
     request.context.logger.info(
       `Request allowed for: ${request.context.clientRemoteAddress}`
     );
@@ -98,5 +98,7 @@ export async function rateLimit(request, response, next) {
   request.context.logger.error(
     `Request limit reached for: ${request.context.clientRemoteAddress}`
   );
-  return response.status(429).send('Too many requests');
+  return response
+    .status(429)
+    .json({ status: 'error', message: 'Too many requests' });
 }

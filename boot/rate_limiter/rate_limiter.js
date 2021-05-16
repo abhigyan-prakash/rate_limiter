@@ -5,9 +5,19 @@ export class RateLimiter extends ContextObject {
   constructor(context, { interval, maxRequests }) {
     super(context);
 
+    if (!interval) {
+      this.logger.error('The interval is not defined');
+      throw new Error('The interval should be defined');
+    }
+
     if (interval < 0) {
       this.logger.error('The interval is not a postive integer');
       throw new Error('The interval should be a positive integer');
+    }
+
+    if (!maxRequests) {
+      this.logger.error('The max requests is not defined');
+      throw new Error('The max requests should be defined');
     }
 
     if (maxRequests < 0) {
@@ -41,7 +51,7 @@ export class RateLimiter extends ContextObject {
     const timestamps = await this.getTimestamps(id, true);
     const numTimestamps = timestamps.length;
 
-    return numTimestamps < this.maxRequests;
+    return numTimestamps > this.maxRequests;
   }
 
   getCurrentMicrotime() {

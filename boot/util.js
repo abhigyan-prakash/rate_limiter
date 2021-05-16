@@ -10,6 +10,6 @@ export class Util extends ContextObject {
   }
 
   isObjectLike(obj) {
-    return !obj && typeof obj === Object;
+    return !!obj && typeof obj === 'object';
   }
 }
