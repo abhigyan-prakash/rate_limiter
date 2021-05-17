@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import { CallContextStatic } from './call_context/call_context_static';
 import { Config } from './config';
 import router from '../routes';
@@ -32,6 +33,8 @@ export async function boot() {
 
   // Initialize the request context
   app.use(createRequestContext);
+
+  app.use(cors());
 
   // Initialize rate limiter
   staticContext.logger.debug(`Initializing the rate limiter`);

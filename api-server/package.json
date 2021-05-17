@@ -12,6 +12,7 @@
   "author": "Abhigyan Prakash",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.5",
     "esm": "^3.2.25",
     "express": "^4.17.1",
     "express-pino-logger": "^6.0.0",
